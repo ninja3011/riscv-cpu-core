@@ -27,13 +27,23 @@
             $prod[31:0] = $val1[31:0] * $val2[31:0];
             $quot[31:0] = $val1[31:0] / $val2[31:0];
          @2
-            $out[31:0] = ($op[1:0] == 2'b00)
+            $mem[31:0] = ($op[2:0] == 3'b101)
+                   ? >>2$mem :
+                   $reset
+                   ? 0 :
+                   >>2$out[31:0];
+            
+            $out[31:0] = ($op[2:0] == 3'b000)
                    ?  $sum[31:0] :
-                   ($op[1:0] == 2'b01)
+                   ($op[2:0] == 3'b001)
                    ? $diff[31:0] :
-                   ($op[1:0] == 2'b10)
+                   ($op[2:0] == 3'b010)
                    ? $prod[31:0] :
-                   $quot[31:0];
+                   ($op[2:0] == 3'b011)
+                   ? $quot[31:0] :
+                   ($op[2:0] == 3'b100)
+                   ? >>2$mem[31:0]:
+                   32'b0;
         
       // Macro instantiations for calculator visualization(disabled by default).
       // Uncomment to enable visualisation, and also,
