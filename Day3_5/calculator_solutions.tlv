@@ -9,22 +9,29 @@
 
 \TLV
    |calc
-      @1
+      @0
          $reset = *reset;
+      @1
+         $val1[31:0] = >>2$out[31:0];
          $val2[31:0] = $rand2[3:0];
-         $cnt[31:0] = $reset ? 0                   // 1 if reset
-                       : >>1$cnt + 1;  // otherwise add 1    
-         $out[31:0] = $reset 
+         $valid[31:0] = ($reset) ? 0
+                       : (>>1$valid == 32'b0) ? 1
+                        : 32'b0;
+         $sum[31:0] = $val1[31:0] + $val2[31:0];
+         $diff[31:0] = $val1[31:0] - $val2[31:0];
+         $prod[31:0] = $val1[31:0] * $val2[31:0];
+         $quot[31:0] = $val1[31:0] / $val2[31:0];
+      @2
+         $out[31:0] = ($reset | !(>>1$valid))
                 ? 32'b0 :
                 ($op[1:0] == 2'b00)
-                ? ($val1[31:0] + $val2[31:0])  : 
+                ?  $sum[31:0] :
                 ($op[1:0] == 2'b01)
-                ? ($val1[31:0] - $val2[31:0])  : 
+                ? $diff[31:0] :
                 ($op[1:0] == 2'b10)
-                ? ($val1[31:0] * $val2[31:0])  : 
-                ($val1[31:0] / $val2[31:0]);
-         $val1[31:0] = >>1$out[31:0];
-
+                ? $prod[31:0] :
+                $quot[31:0];
+        
       // Macro instantiations for calculator visualization(disabled by default).
       // Uncomment to enable visualisation, and also,
       // NOTE: If visualization is enabled, $op must be defined to the proper width using the expression below.
@@ -34,7 +41,7 @@
       //  o $rand2[3:0]
       //  o $op[x:0]
       
-//m4+cal_viz(@3) // Arg: Pipeline stage represented by viz, should be atleast equal to last stage of CALCULATOR logic.
+   m4+cal_viz(@2) // Arg: Pipeline stage represented by viz, should be atleast equal to last stage of CALCULATOR logic.
 
    
    // Assert these to end simulation (before Makerchip cycle limit).
