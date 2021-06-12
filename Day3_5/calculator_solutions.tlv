@@ -12,25 +12,28 @@
       @0
          $reset = *reset;
       @1
-         $val1[31:0] = >>2$out[31:0];
-         $val2[31:0] = $rand2[3:0];
+         
          $valid[31:0] = ($reset) ? 0
-                       : (>>1$valid == 32'b0) ? 1
-                        : 32'b0;
-         $sum[31:0] = $val1[31:0] + $val2[31:0];
-         $diff[31:0] = $val1[31:0] - $val2[31:0];
-         $prod[31:0] = $val1[31:0] * $val2[31:0];
-         $quot[31:0] = $val1[31:0] / $val2[31:0];
-      @2
-         $out[31:0] = ($reset | !(>>1$valid))
-                ? 32'b0 :
-                ($op[1:0] == 2'b00)
-                ?  $sum[31:0] :
-                ($op[1:0] == 2'b01)
-                ? $diff[31:0] :
-                ($op[1:0] == 2'b10)
-                ? $prod[31:0] :
-                $quot[31:0];
+                          : (>>1$valid == 32'b0) ? 1
+                           : 32'b0;
+         $valid_or_reset =  $reset | $valid;     
+      ?$valid_or_reset   
+         @1
+            $val1[31:0] = >>2$out[31:0];
+            $val2[31:0] = $rand2[3:0];
+            
+            $sum[31:0] = $val1[31:0] + $val2[31:0];
+            $diff[31:0] = $val1[31:0] - $val2[31:0];
+            $prod[31:0] = $val1[31:0] * $val2[31:0];
+            $quot[31:0] = $val1[31:0] / $val2[31:0];
+         @2
+            $out[31:0] = ($op[1:0] == 2'b00)
+                   ?  $sum[31:0] :
+                   ($op[1:0] == 2'b01)
+                   ? $diff[31:0] :
+                   ($op[1:0] == 2'b10)
+                   ? $prod[31:0] :
+                   $quot[31:0];
         
       // Macro instantiations for calculator visualization(disabled by default).
       // Uncomment to enable visualisation, and also,
