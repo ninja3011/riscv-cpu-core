@@ -13,6 +13,10 @@
 \TLV
    $reset = *reset;
    
+   
+   $cnt[31:0] = $reset ? 0                   // 1 if reset
+                       : >>1$cnt + 1;  // otherwise add 1       
+   
    $val1[31:0] = $rand2[3:0];
    $val2[31:0] = $rand2[3:0];
 
