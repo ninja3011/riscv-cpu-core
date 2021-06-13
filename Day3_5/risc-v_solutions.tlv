@@ -107,7 +107,15 @@
                          32'bx;
          $rf_wr_en = $rd_valid & ( $rd != 5'b0);
          $rf_wr_index[4:0] = $rd;
-         $rf_wr_data = $result; 
+         $rf_wr_data = $result;
+         
+         $taken_br = $is_beq ? ($src1_value == $src2_value) :
+                     $is_bne ? ($src1_value != $src2_value) :
+                     $is_blt ? ($src1_value < $src2_value) ^ ($src1_value[31] != $src2_value[31]) :
+                     $is_bge ? ($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31]) :
+                     $is_bltu ? ($src1_value < $src2_value) :
+                     $is_bgeu ? ($src1_value >= $src2_value) :
+                     1'b0;
          
          `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $is_addi $is_add)
       // YOUR CODE HERE
