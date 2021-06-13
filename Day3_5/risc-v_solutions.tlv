@@ -105,6 +105,9 @@
          $result[31:0] = $is_addi ? $src1_value + $imm :
                          $is_add ? $src1_value + $src2_value :
                          32'bx;
+         $rf_wr_en = $rd_valid & ( $rd != 5'b0);
+         $rf_wr_index[4:0] = $rd;
+         $rf_wr_data = $result; 
          
          `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $is_addi $is_add)
       // YOUR CODE HERE
