@@ -42,9 +42,9 @@
          $reset = *reset;
          $pc[31:0] = (>>1$reset)
                   ? '0 :
-                  (>>1$taken_br) 
-                  ? (>>1$br_tgt_pc ) : 
-                  >>1$pc[31:0] + 32'd4;
+                  (>>3$valid_taken_br) 
+                  ? (>>3$br_tgt_pc ) : 
+                  >>3$inc_pc;
          $imem_rd_en = !$reset;
          $imem_rd_addr[M4_IMEM_INDEX_CNT-1:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
       
@@ -53,6 +53,7 @@
                   $start ? 1'b1:
                   >>3$valid;
       @1
+         $inc_pc[31:0] = $pc[31:0] + 32'd4;
          $instr[31:0] = $imem_rd_data[31:0];
          
          $is_i_instr = $instr[6:2] ==? 5'b0000x ||
@@ -116,7 +117,7 @@
          $result[31:0] = $is_addi ? $src1_value + $imm :
                          $is_add ? $src1_value + $src2_value :
                          32'bx;
-         $rf_wr_en = $rd_valid && ( $rd != 5'b0);
+         $rf_wr_en = $rd_valid && ( $rd != 5'b0) && $valid;
          $rf_wr_index[4:0] = $rd;
          $rf_wr_data[31:0] = $result;
          
@@ -130,6 +131,9 @@
          $br_tgt_pc[31:0] = $pc + $imm; 
           
          `BOGUS_USE($is_beq $is_bne $is_blt $is_bge $is_bltu $is_bgeu $is_addi $is_add)
+         
+      @3 
+         $valid_taken_br = $valid && $taken_br;
       // YOUR CODE HERE
       // ...
 
