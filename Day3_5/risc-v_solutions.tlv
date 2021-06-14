@@ -40,18 +40,13 @@
    |cpu
       @0
          $reset = *reset;
-         $pc[31:0] = (>>1$reset)
-                  ? '0 :
-                  (>>3$valid_taken_br) 
-                  ? (>>3$br_tgt_pc ) : 
-                  >>3$inc_pc;
+         $pc[31:0]   =  >>1$reset ? '0 :
+                        >>3$valid_taken_br ? >>3$br_tgt_pc :
+                        >>1$inc_pc ;
          $imem_rd_en = !$reset;
          $imem_rd_addr[M4_IMEM_INDEX_CNT-1:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
       
          $start = >>1$reset && !$reset;
-         $valid = $reset ? 1'b0 :
-                  $start ? 1'b1:
-                  >>3$valid;
       @1
          $inc_pc[31:0] = $pc[31:0] + 32'd4;
          $instr[31:0] = $imem_rd_data[31:0];
@@ -135,7 +130,8 @@
                      $is_bge ? ($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31]) :
                      $is_bltu ? ($src1_value < $src2_value) :
                      $is_bgeu ? ($src1_value >= $src2_value) :
-                     1'b0;         
+                     1'b0;
+         $valid = !(>>1$valid_taken_br || >>2$valid_taken_br);
          $valid_taken_br = $valid && $taken_br;
 
          $result[31:0] = $is_addi ? $src1_value + $imm :
