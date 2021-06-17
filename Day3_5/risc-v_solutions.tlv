@@ -169,7 +169,7 @@
          $result[31:0] =   $is_andi    ?  $src1_value & $imm :
                            $is_ori     ?  $src1_value | $imm :
                            $is_xori    ?  $src1_value ^ $imm :
-                           $is_addi    ?  $src1_value + $imm :
+                           ($is_addi || $is_load || $is_s_instr) ? $src1_value + $imm :
                            $is_slli    ?  $src1_value << $imm[5:0]  :
                            $is_srli    ?  $src1_value >> $imm[5:0]  :
                            $is_and     ?  $src1_value & $src2_value :
@@ -189,11 +189,11 @@
                            $is_slt     ?  (($src1_value[31] == $src2_value[31]) ? $sltu_rslt  : {31'b0, $src1_value[31]}) :
                            $is_slti    ?  (($src1_value[31] == $imm[31])        ? $sltiu_rslt : {31'b0, $src1_value[31]}) :
                            $is_sra     ?  {{32{$src1_value[31]}}, $src1_value} >> $src2_value[4:0] :
-                                          32'bx;
+                                          32'bx; 
          
-         $rf_wr_en = $rd_valid && ( $rd != 5'b0) && $valid;
-         $rf_wr_index[4:0] = $rd;
-         $rf_wr_data[31:0] = $result;
+         $rf_wr_en            =  ($rd_valid && $valid && $rd != 5'b0) || >>2$valid_load;
+         $rf_wr_index[4:0]    =  >>2$valid_load ? >>2$rd : $rd;
+         $rf_wr_data[31:0]    =  >>2$valid_load ? >>2$ld_data : $result;
       // YOUR CODE HERE
       // ...
 
