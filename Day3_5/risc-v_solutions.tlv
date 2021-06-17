@@ -41,10 +41,12 @@
    |cpu
       @0
          $reset = *reset;
-         $pc[31:0]   =  >>1$reset            ?  '0 :
-                        >>3$valid_taken_br   ?  >>3$br_tgt_pc :
-                        >>3$valid_load       ?  >>3$inc_pc    :
-                                                >>1$inc_pc ;
+         $pc[31:0]   =  >>1$reset                     ?  '0 :
+                        >>3$valid_taken_br            ?  >>3$br_tgt_pc   :
+                        >>3$valid_load                ?  >>3$inc_pc      :
+                        >>3$valid_jump && >>3$is_jal  ?  >>3$br_tgt_pc   :
+                        >>3$valid_jump && >>3$is_jalr ?  >>3$jalr_tgt_pc :
+                                                         >>1$inc_pc ;
          $imem_rd_en = !$reset;
          $imem_rd_addr[M4_IMEM_INDEX_CNT-1:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
       
@@ -150,6 +152,7 @@
                      $rf_rd_data2 ;   
          
          $br_tgt_pc[31:0] = $pc + $imm; 
+         $jalr_tgt_pc[31:0]   =  $src1_value + $imm;
          
       @3 
          $taken_br = $is_beq ? ($src1_value == $src2_value) :
@@ -162,8 +165,10 @@
 
          $valid = !(>>1$valid_taken_br || >>2$valid_taken_br ||
                     >>1$valid_load     || >>2$valid_load);
+                    
          $valid_taken_br = $valid && $taken_br;
          $valid_load =  $valid && $is_load;
+         
          $sltu_rslt[31:0] = $src1_value < $src2_value;
          $sltiu_rslt[31:0] =  $src1_value < $imm;
          
@@ -191,7 +196,10 @@
                            $is_slti    ?  (($src1_value[31] == $imm[31])        ? $sltiu_rslt : {31'b0, $src1_value[31]}) :
                            $is_sra     ?  {{32{$src1_value[31]}}, $src1_value} >> $src2_value[4:0] :
                                           32'bx; 
-         
+
+         $is_jump    =  $is_jal || $is_jalr;
+         $valid_jump =  $is_jump && $valid;
+                                          
          $rf_wr_en            =  ($rd_valid && $valid && $rd != 5'b0) || >>2$valid_load;
          $rf_wr_index[4:0]    =  >>2$valid_load ? >>2$rd : $rd;
          $rf_wr_data[31:0]    =  >>2$valid_load ? >>2$ld_data : $result;
