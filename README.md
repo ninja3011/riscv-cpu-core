@@ -6,7 +6,8 @@ Follow this repo to build your RISC-V pipelined core, housing a RV64I instructio
 - [What is RISC-V ISA?](#what-is-risc-v-isa)
 - [GNU compiler toolchain](#risc-v-gnu-compiler-toolchain)
 - [Application Binary Interface](#application-binary-interface)
-- [Digital Logic with TL-Verilog and Makerchip](#digital-logic-with-tl-verilog-and-makerchip)
+- [TL-Verilog](#tl-verilog)
+- [Makerchip](#makerchip)
   - [Combinational logic](#combinational-logic)
   - [Sequential logic](#sequential-logic)
   - [Pipelined logic](#pipelined-logic)
@@ -131,4 +132,40 @@ toolchain.
 ---
 ![lab3](https://user-images.githubusercontent.com/51434707/121593950-14d06080-ca5a-11eb-85de-8cf8dcf1a2dc.png)
 
+# TL-Verilog
 
+- Transaction-Level Verilog (TL-Verilog) is an emerging extension to SystemVerilog that supports transaction-level design methodology. In transaction-level design, a transaction is an entity that moves through a microarchitecture.
+- It is operated upon and steered through the machinery by flow components such as pipelines, arbiters, and queues.
+- A transaction might be a machine instruction, a flit of a packet, or a memory read/write.
+- The flow of a transaction can be established independently from the logic that operates on the transaction. 
+
+# Makerchip
+
+- Prime choice of online Editor for coding in TL-Verilog.
+- We can code, compile, simulate, and debug Verilog designs, all from our browser. Our code, block diagrams, waveforms, and novel visualization capabilities are tightly integrated for a seamless design experience.
+- Advantages:
+  * Develop Verilog in your Browser
+  * Easy Pipelining
+  * Organized Waveforms
+  * Organized Diagrams
+  * Linked Design and Debug
+
+
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_1.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_2.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_3.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_4.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_5.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_6.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_7.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_8.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_9.PNG)
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_1.PNG)
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_8.PNG)
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG)
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_viz.PNG)
+
+
+
+
+- 
