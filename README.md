@@ -17,10 +17,10 @@ Follow this repo to build your RISC-V pipelined core, housing a RV64I instructio
   - [Decode](#decode)
   - [Execute](#execute)
   - [Control Logic](#control-logic)
+  - [Base CPU](#base-cpu)
 - [Pipelined RISC-V CPU](#pipelined-risc-v-cpu)
-  - [Pipelinig the CPU](#pipelining-the-cpu)
-  - [Load and store instructions and memory](#load-and-store-instructions-and-memory)
-  - [Completing the RISC-V CPU](#completing-the-risc-v-cpu)
+  - [Jump](#jump)
+  - [Completed Pipelined RISC-V CPU](#completed-pipelined-risc-v-cpu)
 - [Acknowledgements](#acknowledgements)
 
 # What is RISC-V ISA?
@@ -34,31 +34,31 @@ Follow this repo to build your RISC-V pipelined core, housing a RV64I instructio
 - This is the RISC-V C and C++ cross-compiler. It supports two build modes:
 a generic ELF/Newlib toolchain and a more sophisticated Linux-ELF/glibc
 toolchain.
-- Installation (UBUNTU) : 
+- **Installation (UBUNTU) :** 
     
     * `$ sudo apt-get install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev`
     * `$ git clone https://github.com/riscv/riscv-gnu-toolchain`
-- Configuration 
+- **Configuration** 
 
      Pick an install path.  If you choose, say, `/opt/riscv`, then add `/opt/riscv/bin` to your `PATH` now. Then, simply run the following command:
-### OPTIONS: 
-    1. (Newlib)
+  #### OPTIONS: 
+    1. **(Newlib)
 
         `./configure --prefix=/opt/riscv`
         
          `make`
 
        You should now be able to use riscv64-unknown-elf-gcc and its cousins.
-    2. (LINUX)
+    2. **(LINUX)
     
-       RV64GC (64-bit):
+       *RV64GC (64-bit):*
        `./configure --prefix=/opt/riscv`
        `make linux`
        
-       32-bit RV32GC : 
+       *32-bit RV32GC :* 
        `./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d`
        `make linux`
-    3. (MULTILIB)
+    3. **(MULTILIB)
     
       `./configure --prefix=/opt/riscv --enable-multilib`
       `make`   (FOR NEWLIB)
@@ -66,28 +66,28 @@ toolchain.
       
       The multilib compiler will have the prefix riscv64-unknown-elf- or riscv64-unknown-linux-gnu-, but will be able to target both 32-bit and 64-bit systems. It will support the most common `-march`/`-mabi` options, which can be seen by using the `--print-multi-lib` flag on either cross-compiler.
        
-### COMMANDS
+#### COMMANDS
 
     Under the risc-v toolchain, 
-  * Compile:
+  * **Compile:**
 
     `riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o <filename.o> <filename.c>`
 
-    Compile with options:
+   **Compile with options:
 
     `riscv64-unknown-elf-gcc <compiler option -O1 ; Ofast> <ABI specifier -lp64; -lp32; -ilp32> <architecture specifier -RV64 ; RV32> -o <filename.o> <filename.c>`
 
     [All Options](https://www.sifive.com/blog/all-aboard-part-1-compiler-args)
 
-  * See Assembly
+  * **See Assembly
     
     `riscv64-unknown-elf-objdump -d <object filename>`
     
-  * Run code
+  * **Run code
   
     `spike pk <filename.o>`
     
-  * Debug code
+  * **Debug code
     
     `spike -d pk <filename.o>` with degub command as `until pc 0 <pc number>`
 
@@ -149,6 +149,8 @@ toolchain.
   * Organized Diagrams
   * Linked Design and Debug
 ### Testing the Validity Tutorial in MakerChip
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/validity_tut.PNG)
 
 # Combinational Logic
@@ -156,33 +158,48 @@ toolchain.
 -Combinational Logic can be thought of as logic that works in a procedural manner. One after the other. Here we are taking the example of AND(ing) 2 signals and of 2 signals.
 
 ### 2-Input Logic
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/2-input.PNG)
 
 ### Vectors (signals)
 - Easy way to visualize is to imagine a different wire for each index of the vector. This is not how it always happens however, there are protocols which help transmit vectors through a single wire as well.
 
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/vectors.PNG)
 
 ### Mux Using ternary
 - Ternary can be thought of as (cond) ? (execute if true) : (execute if false) ; very similar to an if-else block.
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/mux.PNG)
 
 ### Combinational Calculator
 - A basic Combinational calculator made with a ternary operator.
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/combinational_calc.PNG)
 
 ### Counter
 - Counter shows us the power of retiming which is made super simple in TLV. Think of adding a Flip-Flop ahead of the signal so the previous value of the signal can be accessed. 
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/counter.PNG)
 
 # Sequential Logic
 
 ### Sequential Tutorial
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/seq_tut.PNG)
 
 ### Completed Calculator 
 - After adding all the blocks, we have coded a complete working Calculator!
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/calc_final_1.PNG)
+
+---
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/calc_final_2.PNG)
 
 # Pipelined Logic
@@ -211,9 +228,18 @@ toolchain.
 - The processor fetches the instruction from the Instr Mem pointed by address given by PC
 
 ### Program Counter
+- PC keeps the track of where the execution is currently at
+- It is also instrumental in branching and Jump instructions
+- By Modifying the PC we can get anywhere in our program
+
+---
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/prog_counter.PNG)
 
 ### Register File Read
+- A register is a collection of flip flops holding memory
+- Here we see how to read its memory
+
+---
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/reg_file_rd.PNG)
 
 # Decode
@@ -227,16 +253,61 @@ toolchain.
   * J-type - Jump 
 - We Code this by piecing the different parts of the instruction and comparing with the RISC-V ISA 
 
+---
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/decode.PNG)
+
 # Execute
 - Here we have completed the ALU
 - And we can witness the CPU Performing its Intended Actions giving us the proper results.
 
-### Completed CPU With Sum 1to9.S running on it
+---
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/alu_complete.PNG)
+
+### Register File Write
+- A register file has the capability of being written to or read from. 
+
+---
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/reg_file_wr.PNG)
+
+# Control Logic
+- Control Logic is the order of execution. 
+- We control the logic or rather embed logic in our programs using control logic instructions.
+- i.e. Branch Instructions
+
+# Base CPU
+- We have completed all the base instructions for running our assembly program!
+
+---
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/testbench.PNG)
+- An important point to note is that the CPU is currently all in one pipeline.
+- In a physical setting this may fail due to hazards and delays
+- But on simulation we get the intended behaviour.
+
+# Pipelined RISC-V CPU
+- Next Order of Business to to seperate the physical processes into different stages. 
+- Imagine each pipeline as a flow and each stage as a unit
+- each stage seperation is marked by an understood flip flop
+- This means all signals will not be in the same cycle, we can manage when which signals reach where.
+
+# Jump 
+- Added Jumps and completed Instruction Decode and ALU for all instruction present in the ISA 
+
+---
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/jump.PNG)
+### Completed Pipelined RISC-V CPU
+- We have completed out CPU! Happy Coding and Extending :)
+- Running 1to9sum.S in the snapshot below 
+
+---
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_viz.PNG)
-<img src="https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG" width="25%" height="25%"/>
 
+---
+<p align ="center">
+<img src="https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG" width="25%" height="25%" />
+</p>
 
+# Acknowledgements
+- [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
+- [Steve Hoover](https://github.com/stevehoover), Founder, Redwood EDA
+- [Shivani Shah](https://github.com/shivanishah269), IIITB , @fossi-foundation
 
-
-
-- 
