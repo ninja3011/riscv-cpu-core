@@ -12,10 +12,9 @@ Follow this repo to build your RISC-V pipelined core, housing a RV64I instructio
   - [Sequential logic](#sequential-logic)
   - [Pipelined logic](#pipelined-logic)
   - [Validity](#validity)
-- [Basic RISC-V CPU micro-architecture](#basic-risc-v-cpu-micro-architecture)
+- [RISC-V CPU Architecture](#risc-v-cpu-architecture)
   - [Fetch](#fetch)
   - [Decode](#decode)
-  - [Register File Read and Write](#register-file-read-and-write)
   - [Execute](#execute)
   - [Control Logic](#control-logic)
 - [Pipelined RISC-V CPU](#pipelined-risc-v-cpu)
@@ -154,19 +153,26 @@ toolchain.
 
 # Combinational Logic
 
+-Combinational Logic can be thought of as logic that works in a procedural manner. One after the other. Here we are taking the example of AND(ing) 2 signals and of 2 signals.
+
 ### 2-Input Logic
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_2.PNG)
 
 ### Vectors (signals)
+- Easy way to visualize is to imagine a different wire for each index of the vector. This is not how it always happens however, there are protocols which help transmit vectors through a single wire as well.
+
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_3.PNG)
 
 ### Mux Using ternary
+- Ternary can be thought of as (cond) ? (execute if true) : (execute if false) ; very similar to an if-else block.
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_4.PNG)
 
 ### Combinational Calculator
+- A basic Combinational calculator made with a ternary operator.
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_6.PNG)
 
 ### Counter
+- Counter shows us the power of retiming which is made super simple in TLV. Think of adding a Flip-Flop ahead of the signal so the previous value of the signal can be accessed. 
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_5.PNG)
 
 # Sequential Logic
@@ -175,8 +181,34 @@ toolchain.
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_7.PNG)
 
 ### Completed Calculator 
+- After adding all the blocks, we have coded a complete working Calculator!
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_8.PNG)
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_9.PNG)
+
+# Pipelined Logic
+- This is a place where TLV Shines bright. All us Verilog users have faced the endless pains of pipelining and fails. In both the calculator and the cpu core we have used pipelines
+- Defined with a '|' symbol
+- Within the Pipeline, multiple stages can be defined using '@'
+- This concept is called Time Abstraction
+
+# Validity
+- Validity can be understood by a single English Word, when?
+- NOTE: This functionality is not a part of other circuit design languages and is exclusive to TLV
+- This will make no difference on the nature of the code to be honest. In usual processes, these would all be not care
+- It basically decides when a signal has significance, so it is only executed then.
+- This keeps the Waveform clean and easy to debug
+- You will see this operator being used '?' throughout the CPU Code.
+
+
+# RISC-V CPU Architecture
+- Any Microprocessor has a main job of executing programs
+- It achieves this is 3 steps
+  * Fetch
+  * Decode 
+  * Execute
+
+# Fetch
+- The processor fetches the instruction from the Instr Mem pointed by address given by PC
 
 ### Program Counter
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_1.PNG)
@@ -184,9 +216,25 @@ toolchain.
 ### Register File Read
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_8.PNG)
 
+# Decode
+- In decode the CPU identifies which instruction has been read in by the processor
+- There are 6 types of instructions we have implemented:
+  * R-type - Register 
+  * I-type - Immediate
+  * S-type - Store
+  * B-type - Branch 
+  * U-type - Upper Immediate
+  * J-type - Jump 
+- We Code this by piecing the different parts of the instruction and comparing with the RISC-V ISA 
+
+# Execute
+- Here we have completed the ALU
+- And we can witness the CPU Performing its Intended Actions giving us the proper results.
+
 ### Completed CPU With Sum 1to9.S running on it
-<img src="https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG" width="25%" height="25%"/>
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_viz.PNG)
+<img src="https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG" width="25%" height="25%"/>
+
 
 
 
