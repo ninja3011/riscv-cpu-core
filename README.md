@@ -149,41 +149,41 @@ toolchain.
   * Organized Diagrams
   * Linked Design and Debug
 ### Testing the Validity Tutorial in MakerChip
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_1.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/validity_tut.PNG)
 
 # Combinational Logic
 
 -Combinational Logic can be thought of as logic that works in a procedural manner. One after the other. Here we are taking the example of AND(ing) 2 signals and of 2 signals.
 
 ### 2-Input Logic
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_2.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/2-input.PNG)
 
 ### Vectors (signals)
 - Easy way to visualize is to imagine a different wire for each index of the vector. This is not how it always happens however, there are protocols which help transmit vectors through a single wire as well.
 
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_3.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/vectors.PNG)
 
 ### Mux Using ternary
 - Ternary can be thought of as (cond) ? (execute if true) : (execute if false) ; very similar to an if-else block.
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_4.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/mux.PNG)
 
 ### Combinational Calculator
 - A basic Combinational calculator made with a ternary operator.
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_6.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/combinational_calc.PNG)
 
 ### Counter
 - Counter shows us the power of retiming which is made super simple in TLV. Think of adding a Flip-Flop ahead of the signal so the previous value of the signal can be accessed. 
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_5.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/counter.PNG)
 
 # Sequential Logic
 
 ### Sequential Tutorial
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_7.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/seq_tut.PNG)
 
 ### Completed Calculator 
 - After adding all the blocks, we have coded a complete working Calculator!
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_8.PNG)
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_9.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/calc_final_1.PNG)
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/calc_final_2.PNG)
 
 # Pipelined Logic
 - This is a place where TLV Shines bright. All us Verilog users have faced the endless pains of pipelining and fails. In both the calculator and the cpu core we have used pipelines
@@ -211,10 +211,10 @@ toolchain.
 - The processor fetches the instruction from the Instr Mem pointed by address given by PC
 
 ### Program Counter
-![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_1.PNG)
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/prog_counter.PNG)
 
 ### Register File Read
-![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_8.PNG)
+![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/reg_file_rd.PNG)
 
 # Decode
 - In decode the CPU identifies which instruction has been read in by the processor
