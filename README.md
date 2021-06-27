@@ -149,20 +149,43 @@ toolchain.
   * Organized Waveforms
   * Organized Diagrams
   * Linked Design and Debug
-
-
+### Testing the Validity Tutorial in MakerChip
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_1.PNG)
+
+# Combinational Logic
+
+### 2-Input Logic
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_2.PNG)
+
+### Vectors (signals)
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_3.PNG)
+
+### Mux Using ternary
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_4.PNG)
-![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_5.PNG)
+
+### Combinational Calculator
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_6.PNG)
+
+### Counter
+![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_5.PNG)
+
+# Sequential Logic
+
+### Sequential Tutorial
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_7.PNG)
+
+### Completed Calculator 
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_8.PNG)
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day3_9.PNG)
+
+### Program Counter
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_1.PNG)
+
+### Register File Read
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/myth_day4_8.PNG)
-![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG)
+
+### Completed CPU With Sum 1to9.S running on it
+<img src="https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG" width="25%" height="25%"/>
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_viz.PNG)
 
 
