@@ -163,27 +163,31 @@ toolchain.
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/2-input.PNG)
 
 ### Vectors (signals)
-- Easy way to visualize is to imagine a different wire for each index of the vector. This is not how it always happens however, there are protocols which help transmit vectors through a single wire as well.
 
 ---
+- Easy way to visualize is to imagine a different wire for each index of the vector. This is not how it always happens however, there are protocols which help transmit vectors through a single wire as well.
+
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/vectors.PNG)
 
 ### Mux Using ternary
-- Ternary can be thought of as (cond) ? (execute if true) : (execute if false) ; very similar to an if-else block.
 
 ---
+- Ternary can be thought of as (cond) ? (execute if true) : (execute if false) ; very similar to an if-else block.
+
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/mux.PNG)
 
 ### Combinational Calculator
-- A basic Combinational calculator made with a ternary operator.
 
 ---
+- A basic Combinational calculator made with a ternary operator.
+
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/combinational_calc.PNG)
 
 ### Counter
-- Counter shows us the power of retiming which is made super simple in TLV. Think of adding a Flip-Flop ahead of the signal so the previous value of the signal can be accessed. 
 
 ---
+- Counter shows us the power of retiming which is made super simple in TLV. Think of adding a Flip-Flop ahead of the signal so the previous value of the signal can be accessed. 
+
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/counter.PNG)
 
 # Sequential Logic
@@ -194,9 +198,10 @@ toolchain.
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/seq_tut.PNG)
 
 ### Completed Calculator 
-- After adding all the blocks, we have coded a complete working Calculator!
 
 ---
+- After adding all the blocks, we have coded a complete working Calculator!
+
 ![calculator](https://github.com/ninja3011/riscv-cpu-core/blob/master/calc_final_1.PNG)
 
 ---
@@ -228,21 +233,25 @@ toolchain.
 - The processor fetches the instruction from the Instr Mem pointed by address given by PC
 
 ### Program Counter
+
+---
 - PC keeps the track of where the execution is currently at
 - It is also instrumental in branching and Jump instructions
 - By Modifying the PC we can get anywhere in our program
 
----
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/prog_counter.PNG)
 
 ### Register File Read
+
+---
 - A register is a collection of flip flops holding memory
 - Here we see how to read its memory
 
----
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/reg_file_rd.PNG)
 
 # Decode
+
+---
 - In decode the CPU identifies which instruction has been read in by the processor
 - There are 6 types of instructions we have implemented:
   * R-type - Register 
@@ -253,20 +262,21 @@ toolchain.
   * J-type - Jump 
 - We Code this by piecing the different parts of the instruction and comparing with the RISC-V ISA 
 
----
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/decode.PNG)
 
 # Execute
+
+---
 - Here we have completed the ALU
 - And we can witness the CPU Performing its Intended Actions giving us the proper results.
 
----
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/alu_complete.PNG)
 
 ### Register File Write
-- A register file has the capability of being written to or read from. 
 
 ---
+- A register file has the capability of being written to or read from. 
+
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/reg_file_wr.PNG)
 
 # Control Logic
@@ -275,9 +285,10 @@ toolchain.
 - i.e. Branch Instructions
 
 # Base CPU
-- We have completed all the base instructions for running our assembly program!
 
 ---
+- We have completed all the base instructions for running our assembly program!
+
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/testbench.PNG)
 - An important point to note is that the CPU is currently all in one pipeline.
 - In a physical setting this may fail due to hazards and delays
@@ -290,18 +301,19 @@ toolchain.
 - This means all signals will not be in the same cycle, we can manage when which signals reach where.
 
 # Jump 
-- Added Jumps and completed Instruction Decode and ALU for all instruction present in the ISA 
 
 ---
+- Added Jumps and completed Instruction Decode and ALU for all instruction present in the ISA 
+
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/jump.PNG)
 ### Completed Pipelined RISC-V CPU
+
+---
 - We have completed out CPU! Happy Coding and Extending :)
 - Running 1to9sum.S in the snapshot below 
 
----
 ![cpu](https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_viz.PNG)
 
----
 <p align ="center">
 <img src="https://github.com/ninja3011/riscv-cpu-core/blob/master/riscv_cpu_diagram.PNG" width="25%" height="25%" />
 </p>
