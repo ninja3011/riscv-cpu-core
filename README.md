@@ -42,14 +42,14 @@ toolchain.
 
      Pick an install path.  If you choose, say, `/opt/riscv`, then add `/opt/riscv/bin` to your `PATH` now. Then, simply run the following command:
   #### OPTIONS: 
-    1. **(Newlib)
+    1. **(Newlib)**
 
         `./configure --prefix=/opt/riscv`
         
          `make`
 
        You should now be able to use riscv64-unknown-elf-gcc and its cousins.
-    2. **(LINUX)
+    2. **(LINUX)**
     
        *RV64GC (64-bit):*
        `./configure --prefix=/opt/riscv`
@@ -58,7 +58,7 @@ toolchain.
        *32-bit RV32GC :* 
        `./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d`
        `make linux`
-    3. **(MULTILIB)
+    3. **(MULTILIB)**
     
       `./configure --prefix=/opt/riscv --enable-multilib`
       `make`   (FOR NEWLIB)
@@ -73,21 +73,21 @@ toolchain.
 
     `riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o <filename.o> <filename.c>`
 
-   **Compile with options:
+   **Compile with options:**
 
     `riscv64-unknown-elf-gcc <compiler option -O1 ; Ofast> <ABI specifier -lp64; -lp32; -ilp32> <architecture specifier -RV64 ; RV32> -o <filename.o> <filename.c>`
 
     [All Options](https://www.sifive.com/blog/all-aboard-part-1-compiler-args)
 
-  * **See Assembly
+  * **See Assembly**
     
     `riscv64-unknown-elf-objdump -d <object filename>`
     
-  * **Run code
+  * **Run code**
   
     `spike pk <filename.o>`
     
-  * **Debug code
+  * **Debug code**
     
     `spike -d pk <filename.o>` with degub command as `until pc 0 <pc number>`
 
