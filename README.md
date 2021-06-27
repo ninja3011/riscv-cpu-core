@@ -5,7 +5,7 @@ Follow this repo to build your RISC-V pipelined core, housing a RV64I instructio
 # Table of Contents
 - [What is RISC-V ISA?](#what-is-risc-v-isa)
 - [GNU compiler toolchain](#risc-v-gnu-compiler-toolchain)
-- [Introduction to ABI](#introduction-to-abi)
+- [Application Binary Interface](#application-binary-interface)
 - [Digital Logic with TL-Verilog and Makerchip](#digital-logic-with-tl-verilog-and-makerchip)
   - [Combinational logic](#combinational-logic)
   - [Sequential logic](#sequential-logic)
@@ -109,6 +109,12 @@ toolchain.
 
 ---
 ![lab2](https://github.com/RISCV-MYTH-WORKSHOP/riscv_myth_workshop_jun21-ninja3011/blob/master/Day2/myth_day2_lab2_3.PNG)
+
+# Application Binary Interface
+
+- Application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
+- ABI defines how your code is stored inside the library file, so that any program using your library can locate the desired function and execute it. ABIs are important when it comes to applications that use external libraries.
+
 
 ### Running the 1to9_custom.c and load.S on the picorv32 riscv cpu core
 
