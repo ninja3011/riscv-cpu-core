@@ -7,15 +7,15 @@
 ### 1) Program Run and Debug
 
 ---
-![lab2](https://github.com/RISCV-MYTH-WORKSHOP/riscv_myth_workshop_jun21-ninja3011/blob/master/Day2/myth_day2_lab2_1.PNG)
+![gnu](https://github.com/ninja3011/riscv-cpu-core/blob/master/Day2/prog_run_debug.PNG)
 ### 2) Debug
 
 ---
-![lab2](https://github.com/RISCV-MYTH-WORKSHOP/riscv_myth_workshop_jun21-ninja3011/blob/master/Day2/myth_day2_lab2_2.PNG)
+![gnu](https://github.com/ninja3011/riscv-cpu-core/blob/master/Day2/debug.PNG)
 ### 3) Assembly code
 
 ---
-![lab2](https://github.com/RISCV-MYTH-WORKSHOP/riscv_myth_workshop_jun21-ninja3011/blob/master/Day2/myth_day2_lab2_3.PNG)
+![gnu](https://github.com/ninja3011/riscv-cpu-core/blob/master/Day2/assembly.PNG)
 
 # Running the 1to9_custom.c and load.S on the picorv32 riscv cpu core
 
@@ -25,9 +25,9 @@
 ### 1) Program Run 
 
 ---
-![lab3](https://github.com/RISCV-MYTH-WORKSHOP/riscv_myth_workshop_jun21-ninja3011/blob/master/Day2/myth_day2_lab3_1.PNG)
+![gnu](https://github.com/ninja3011/riscv-cpu-core/blob/master/Day2/prog_run.PNG)
 
 ### 2) Read rv32im.sh
 
 ---
-![lab3](https://user-images.githubusercontent.com/51434707/121593950-14d06080-ca5a-11eb-85de-8cf8dcf1a2dc.png)
+![gnu](https://github.com/ninja3011/riscv-cpu-core/blob/master/Day2/read_rv32im.PNG)
