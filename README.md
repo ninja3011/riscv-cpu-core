@@ -2,6 +2,14 @@
 
 Follow this repo to build your RISC-V pipelined core, housing a RV64I instruction set. 
 
+---
+**Codes:**
+- [Calculator with Memory](https://github.com/ninja3011/riscv-cpu-core/blob/0ef0985c46cd8b82766e21e9d06581bc470d742d/Day3_5/calculator_solutions.tlv)
+  Run in [makerchip](https://myth3.makerchip.com/sandbox?code_url=https:%2F%2Fraw.githubusercontent.com%2Fstevehoover%2FRISC-V_MYTH_Workshop%2Fmaster%2Fcalculator_shell.tlv)
+- [Pipelined RISC-V CPU CORE](https://github.com/ninja3011/riscv-cpu-core/blob/0ef0985c46cd8b82766e21e9d06581bc470d742d/Day3_5/risc-v_solutions.tlv)
+   Run in [makerchip](https://myth3.makerchip.com/sandbox?code_url=https:%2F%2Fraw.githubusercontent.com%2Fstevehoover%2FRISC-V_MYTH_Workshop%2Fmaster%2Frisc-v_shell.tlv)
+   
+---
 # Table of Contents
 - [What is RISC-V ISA?](#what-is-risc-v-isa)
 - [GNU compiler toolchain](#risc-v-gnu-compiler-toolchain)
